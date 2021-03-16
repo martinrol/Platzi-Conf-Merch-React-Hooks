@@ -5,34 +5,34 @@
   display: grid;
   padding: 0 0 4em 0;
 }
-.Checkout-item {
+.Checkout__content--item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 10px 0 0 0;
 }
-.Checkout-item .fas {
+.Checkout__content--item .fas {
   margin: 0 0 0 10px;
   color: rgba(0,0,0,0.4);
   cursor: pointer;
 }
-.Checkout-item button {
+.Checkout__content--item button {
   background-color: transparent;
   border: none;
   outline: none;
 }
-.Checkout-element {
+.Checkout__content--item-element {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   border-bottom: 1px solid #eee;
 }
-.Checkout-element h4 {
+.Checkout__content--item-element h4 {
   margin: 0;
 }
 
-.Checkout-sidebar button {
+.Checkout__content--sidebar button {
   box-shadow: inset 0px 1px 0px 0px #bee2f9;
     background: linear-gradient(to bottom, #63b8ee 5%, #468ccf 100%);
     background-color: #63b8ee;
