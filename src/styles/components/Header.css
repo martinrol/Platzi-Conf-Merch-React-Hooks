@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
 }
-.Header-checkout {
+.Header__checkout {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
