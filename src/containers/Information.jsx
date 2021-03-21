@@ -1,9 +1,18 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useForm } from 'react-hook-form';
+
+import AppContext from '../context/AppContext';
 
 import '../styles/components/Information.css';
 
-const Information = () => {
+const Information = (props) => {
+    const { state: { cart }, addToBuyer } = useContext(AppContext);
+    const { register, handleSubmit } = useForm();
+    const onSubmit = buyer => {
+        addToBuyer(buyer);
+        console.log(buyer)
+    }
+
     return (
         <section className="Information">
             <div className="Information__content">
@@ -11,7 +20,7 @@ const Information = () => {
                     <h2>Contact Information:</h2>
                 </div>
                 <div className="Information__content--form">
-                    <form action="">
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <label htmlFor="name">
                             Full Name
                             <input 
@@ -19,6 +28,7 @@ const Information = () => {
                             placeholder="Full Name" 
                             name="name" 
                             id="name" 
+                            ref={register}
                             />
                         </label>
                         <label htmlFor="email">
@@ -27,7 +37,8 @@ const Information = () => {
                             type="email" 
                             placeholder="Email" 
                             name="email" 
-                            id="email" 
+                            id="email"
+                            ref={register}
                             />
                         </label>
                         <label htmlFor="address">
@@ -37,6 +48,7 @@ const Information = () => {
                             placeholder="Address"
                             name="address"
                             id="address"
+                            ref={register}
                             />
                         </label>
                         <label htmlFor="apto">
@@ -45,7 +57,8 @@ const Information = () => {
                             type="text" 
                             placeholder="APT" 
                             name="apto" 
-                            id="apto" 
+                            id="apto"
+                            ref={register}
                             />
                         </label>
                         <label htmlFor="country">
@@ -55,6 +68,7 @@ const Information = () => {
                             placeholder="Country"
                             name="country"
                             id="country"
+                            ref={register}
                             />
                         </label>
                         <label htmlFor="state">
@@ -64,6 +78,7 @@ const Information = () => {
                             placeholder="State" 
                             name="state" 
                             id="state" 
+                            ref={register}
                             />
                         </label>
                         <label htmlFor="city">
@@ -73,6 +88,7 @@ const Information = () => {
                             placeholder="City" 
                             name="city" 
                             id="city" 
+                            ref={register}
                             />
                         </label>
                         <label htmlFor="cp">
@@ -82,36 +98,46 @@ const Information = () => {
                             placeholder="Postal Code" 
                             name="cp" 
                             id="cp" 
+                            ref={register}
                             />
                         </label>
                         <label htmlFor="phone">
                             Phone
                             <input 
-                            type="text" 
+                            type="tel" 
                             placeholder="Phone" 
                             name="phone" 
                             id="phone" 
+                            ref={register}
                             />
                         </label>
+                        
+                        <div className="Information__content--buttons">
+                            <div className="Information__content--buttons-back">
+                                <button type="button" onClick={() => props.history.goBack()}>
+                                    Go Back
+                                </button>
+                            </div>
+                            <div className="Information__content--buttons-next">
+                                <button type="submit">
+                                    Pay
+                                </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
-                <div className="Information__content--buttons">
-                    <div className="Information__content--buttons-back">Go Back</div>
-                    <div className="Information__content--buttons-next">
-                        <Link to="/checkout/payment">
-                            Pay
-                        </Link>
-                    </div>
-                </div>
+                
             </div>
             <div className="Information__sidebar">
                 <h3>Order Summary:</h3>
-                <div className="Information__sidebar--item">
-                    <div className="Information__sidebar--item-element">
-                        <h4>ITEM Name</h4>
-                        <span>$10</span>
+                {cart.map((item) => (
+                    <div className="Information__sidebar--item" key={item.title}>
+                        <div className="Information__sidebar--item-element">
+                            <h4>{item.title}</h4>
+                            <span>${item.price}</span>
+                        </div>
                     </div>
-                </div>
+                ))}
             </div>
         </section>
     )
