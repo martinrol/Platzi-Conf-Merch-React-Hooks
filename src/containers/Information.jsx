@@ -10,7 +10,7 @@ const Information = (props) => {
     const { register, handleSubmit } = useForm();
     const onSubmit = buyer => {
         addToBuyer(buyer);
-        console.log(buyer)
+        props.history.push('/checkout/payment');
     }
 
     return (
