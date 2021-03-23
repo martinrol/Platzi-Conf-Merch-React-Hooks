@@ -7,28 +7,28 @@
 .Payment-back {
   margin: 10px 0 0 0;
 }
-.Payment-item {
+.Payment__content--item {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.Payment-item .fas {
+.Payment__content--item .fas {
   margin: 0 0 0 10px;
   color: rgba(0,0,0,0.4);
   cursor: pointer;
 }
-.Payment-item button {
+.Payment__content--item button {
   background-color: transparent;
   border: none;
   outline: none;
 }
-.Payment-element {
+.Payment__content--item-element {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   border-bottom: 1px solid #eee;
 }
-.Payment-element h4 {
+.Payment__content--item-element h4 {
   margin: 0;
 }

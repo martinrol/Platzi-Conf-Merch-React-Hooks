@@ -2,6 +2,8 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 
+import { sumTotal } from '../utils/sumTotal';
+
 import CheckoutItem from '../components/CheckoutItem';
 
 import '../styles/components/Checkout.css';
@@ -11,13 +13,6 @@ const Checkout = () => {
 
     const handleRemoteItem = product => () => {
         removeFromCart(product);
-    }
-
-    const handleSumTotal = () => {
-        const reducer = (accum, currentValue) => accum + currentValue.price;
-        const sum = cart.reduce(reducer, 0);
-
-        return sum;
     }
 
     return (
@@ -33,7 +28,7 @@ const Checkout = () => {
             </div>
             {cart.length > 0 &&
                 <div className="Checkout__content--sidebar">
-                    <h3>{`Total Price: $ ${handleSumTotal()}`}</h3>
+                    <h3>{`Total Price: $ ${sumTotal(cart)}`}</h3>
                     <Link to="/checkout/information">
                         <button type="button">Continue order</button>
                     </Link>
