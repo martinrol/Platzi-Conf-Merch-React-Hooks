@@ -7,7 +7,7 @@ import { sumTotal } from '../utils/sumTotal';
 import '../styles/components/Payment.css';
 
 const Payment = (props) => {
-    const { state: {cart, buyer} } = useContext(AppContext);
+    const { state: {cart, buyer}, addNewOrder } = useContext(AppContext);
     const clientPaypalID = pass.paypalPaymentClientID;
 
     const paypalOptions = {
@@ -22,8 +22,7 @@ const Payment = (props) => {
     }
 
     const handlePaymentSuccess = data => {
-        console.log(data)
-        if(data.status === 'COMPLETE') {
+        if(data.status === 'COMPLETED') {
             const newOrder = {
                 buyer,
                 product: cart,
