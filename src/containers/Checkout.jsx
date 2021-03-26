@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import AppContext from '../context/AppContext';
+import { Helmet } from 'react-helmet';
 
 import { sumTotal } from '../utils/sumTotal';
 
@@ -16,6 +17,11 @@ const Checkout = () => {
     }
 
     return (
+        <>
+        <Helmet>
+            <title>Order list - Platzi Conf Merch</title>
+        </Helmet>
+        
         <section className="Checkout">
             <div className="Checkout__content">
                 {cart.length > 0 ? <h3>Order List</h3> : <h3>No orders...</h3>}
@@ -35,6 +41,7 @@ const Checkout = () => {
                 </div>
             }   
         </section>
+        </>
     )
 }
 
