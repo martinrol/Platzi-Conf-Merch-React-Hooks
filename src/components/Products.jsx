@@ -9,8 +9,8 @@ const Products = () => {
     // const { state, addToCart } = useContext(AppContext);
     // const { products } = state;
 
-    const { state: { products }, addToCart } = useContext(AppContext);
-
+    const { products , addToCart } = useContext(AppContext);
+    
     const handleAddToCart = product => () => {
         addToCart(product);
     }
