@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 import { PayPalButton } from 'react-paypal-button';
 import AppContext from '../context/AppContext';
 import { pass } from '../../pass';
@@ -7,58 +7,61 @@ import { sumTotal } from '../utils/sumTotal';
 import '../styles/components/Payment.css';
 
 const Payment = (props) => {
-    const { state: {cart, buyer}, addNewOrder } = useContext(AppContext);
-    const clientPaypalID = pass.paypalPaymentClientID;
+  const {
+    state: { cart, buyer },
+    addNewOrder,
+  } = useContext(AppContext);
+  const clientPaypalID = pass.paypalPaymentClientID;
 
-    const paypalOptions = {
-        clientId: clientPaypalID,
-        intent: 'capture',
-        currency: 'USD'
+  const paypalOptions = {
+    clientId: clientPaypalID,
+    intent: 'capture',
+    currency: 'USD',
+  };
+
+  const buttonStyles = {
+    layout: 'vertical',
+    shape: 'rect',
+  };
+
+  const handlePaymentSuccess = (data) => {
+    if (data.status === 'COMPLETED') {
+      const newOrder = {
+        buyer,
+        product: cart,
+        payment: data,
+      };
+      addNewOrder(newOrder);
+      props.history.push('/checkout/success');
     }
+  };
 
-    const buttonStyles = {
-        layout: 'vertical',
-        shape: 'rect'
-    }
-
-    const handlePaymentSuccess = data => {
-        if(data.status === 'COMPLETED') {
-            const newOrder = {
-                buyer,
-                product: cart,
-                payment: data
-            }
-            addNewOrder(newOrder);
-            props.history.push('/checkout/success');
-        }
-    }
-
-    return (
-        <section className="Payment">
-            <div className="Payment__content">
-                <h3>Order summary: </h3>
-                {cart.map((item) => (
-                    <div className="Payment__content--item" key={item.title}>
-                        <div className="Payment__content--item-element">
-                            <h4>{item.title}</h4>
-                            <span>$ {item.price}</span>
-                        </div>
-                    </div>
-                ))}
-                <div className="Payment__content--button">
-                    <PayPalButton 
-                        paypalOptions={paypalOptions}
-                        buttonStyles={buttonStyles}
-                        amount={sumTotal(cart)}
-                        onPaymentStart={() => console.log('Start Payment')}
-                        onPaymentSuccess={data => handlePaymentSuccess(data)}
-                        onPaymentError={error => console.log(error)}
-                        onPaymentCancel={data => console.log(data)}
-                    />
-                </div>
+  return (
+    <section className="Payment">
+      <div className="Payment__content">
+        <h3>Order summary: </h3>
+        {cart.map((item) => (
+          <div className="Payment__content--item" key={item.title}>
+            <div className="Payment__content--item-element">
+              <h4>{item.title}</h4>
+              <span>$ {item.price}</span>
             </div>
-        </section>
-    )
-}
+          </div>
+        ))}
+        <div className="Payment__content--button">
+          <PayPalButton
+            paypalOptions={paypalOptions}
+            buttonStyles={buttonStyles}
+            amount={sumTotal(cart)}
+            onPaymentStart={() => console.log('Start Payment')}
+            onPaymentSuccess={(data) => handlePaymentSuccess(data)}
+            onPaymentError={(error) => console.log(error)}
+            onPaymentCancel={(data) => console.log(data)}
+          />
+        </div>
+      </div>
+    </section>
+  );
+};
 
-export default Payment
+export default Payment;

@@ -9,17 +9,19 @@ const Success = () => {
   const { buyer } = state;
   const location = useGoogleAddress(buyer[0].address);
 
-    return (
-        <section className="Success">
-            <div className="Success__content">
-                <h2>{`${(buyer[0].name).charAt(0).toUpperCase()} Thank you for your purchase`}</h2>
-                <span>Your order will arrive in 3 days at your address: </span>
-                <div className="Success__content--map">
-                    <Map data={location}/>
-                </div>
-            </div>
-        </section>
-    )
-}
+  return (
+    <section className="Success">
+      <div className="Success__content">
+        <h2>{`${buyer[0].name
+          .charAt(0)
+          .toUpperCase()} Thank you for your purchase`}</h2>
+        <span>Your order will arrive in 3 days at your address: </span>
+        <div className="Success__content--map">
+          <Map data={location} />
+        </div>
+      </div>
+    </section>
+  );
+};
 
-export default Success
+export default Success;
